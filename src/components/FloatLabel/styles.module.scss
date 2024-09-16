@@ -1,0 +1,63 @@
+.floatLabel {
+  @apply relative;
+  > label {
+    @apply text-xs md:text-sm font-normal absolute pointer-events-none left-0 top-0 px-4 md:px-5 py-4 leading-[18px] md:leading-[22px] z-10;
+    transition: 0.2s ease all;
+  }
+  &:global(.float) {
+    > label {
+      @apply text-xs py-1 md:py-2 text-gray-20;
+    }
+    > :global(.ant-input),
+    :global(.ant-input-password),
+    :global(.ant-input-group-wrapper) {
+      @apply pt-6 pb-2;
+    }
+  }
+  > :global(.ant-input),
+  :global(.ant-input-password),
+  :global(.ant-input-group-wrapper) {
+    @apply h-[unset] px-4 md:px-5 py-4;
+  }
+  :global(.ant-input) {
+    @apply leading-4 md:leading-5;
+  }
+  ::-webkit-input-placeholder {
+    /* WebKit browsers */
+    @apply text-transparent;
+  }
+  :-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    @apply text-transparent;
+  }
+  ::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    @apply text-transparent;
+  }
+  :-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    @apply text-transparent;
+  }
+  input::placeholder {
+    @apply text-transparent;
+  }
+  textarea::-webkit-input-placeholder {
+    /* WebKit browsers */
+    @apply text-transparent;
+  }
+  textarea:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    @apply text-transparent;
+  }
+  textarea::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    @apply text-transparent;
+  }
+  textarea:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    @apply text-transparent;
+  }
+  textarea::placeholder {
+    @apply text-transparent;
+  }
+}

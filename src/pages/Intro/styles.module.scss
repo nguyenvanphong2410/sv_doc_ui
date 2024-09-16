@@ -1,0 +1,52 @@
+.introWrap {
+    margin-top: 50px;
+    margin-top: 200px;
+    height: calc(100vh - 205px);
+
+
+    .titleIntro {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px ;
+        font-weight: 600;
+        color: rgb(27, 96, 161);
+    }
+
+    .contentIntro {
+        max-width: 1000px;
+        min-width: 1000px;
+        width: 1000px;
+        padding: 20px;
+        margin: 0 auto;
+        margin-bottom: 50px;
+
+        .itemIntro {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .imgIntro {
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+            }
+        }
+        .textIntro {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 20px;
+            color: grey;
+            font-weight: 600;
+        }
+        
+        .textDesc {
+            margin-top: 30px;
+            color: grey;
+            text-align: justify;
+
+        }
+    }
+}

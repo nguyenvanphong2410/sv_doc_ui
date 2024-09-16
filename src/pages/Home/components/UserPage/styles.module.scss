@@ -1,0 +1,42 @@
+// Thêm các styles mới
+.newDocumentWrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 50px;
+
+    .titleNewDocument {
+        font-size: 36px;
+        font-weight: bold;
+        color: #101e6b;
+        margin-bottom: 10px;
+    }
+
+}
+
+.contentLayout {
+
+    @apply max-w-[1300px] items-center mx-auto w-[1300px] lg:p-4;
+    white-space: nowrap;
+    overflow-x: auto;
+
+    .categoriesItem {
+        margin: 16px 8px 0px;
+        border: solid 1px #101e6b;
+        border-radius: 6px;
+        padding: 8px;
+        display: inline-flex;
+        transition: all 0.2s ease;
+        color: #ffffff;
+        background-color: #101e6b;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+
+}

@@ -1,0 +1,62 @@
+.hihii {
+    // display: flex;
+    flex-direction: column;
+}
+
+.cardContainer {
+    margin-top: 50px;
+}
+
+.nameDocumentCard {
+    color: #4e4f52;
+    font-size: 20px;
+    font-weight: 700;
+
+    &:hover {
+        opacity: 0.8;
+        color: #0f2f7f;
+    }
+}
+
+.mainNavRightOption {
+    display: flex;
+    align-items: center;
+}
+
+.cardItem {
+    box-shadow: rgba(100, 100, 109, 0.3) 0px 7px 10px 0px;
+
+    &:hover {
+        transform: scale(1.04);
+        transition: transform 0.2s ease-in-out;
+        -webkit-transform: scale(1.04);
+        -moz-transform: scale(1.04);
+        -o-transform: scale(1.04);
+        -ms-transform: scale(1.04);
+    }
+
+    &:not(:hover) {
+        transform: scale(1);
+        transition: transform 0.6s ease-in-out;
+    }
+
+}
+
+.itemCard {
+
+    .iconOriginCard {
+        color: #313233;
+    }
+
+    .textOriginCard {
+        color: #303031;
+        font-size: 14px;
+
+
+    }
+
+    .infoOriginCard {
+        color: #6d7272;
+        font-size: 14px;
+    }
+}

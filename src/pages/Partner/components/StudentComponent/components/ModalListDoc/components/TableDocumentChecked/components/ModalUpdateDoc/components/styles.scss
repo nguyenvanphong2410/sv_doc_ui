@@ -1,0 +1,21 @@
+.icon-img-document {
+    @apply bg-white shadow rounded-[50%] flex justify-center items-center absolute z-10 cursor-pointer fill-[#99A1B7] hover:fill-blue-60
+        md:w-[30px] s:w-[28px] md:h-[30px] s:h-[28px] 
+}
+
+.icon-edit-img-document {
+    @apply md:left-[135px] s:left-[88px] md:top-[-14px] s:top-[100px];
+}
+
+.icon-remove-img-document {
+    @apply md:left-[135px] s:left-[87px] md:top-[79px] s:top-[175px];
+}
+
+.img-avt-document {
+    @apply shadow border-white rounded-[8px] border-[3px] object-cover
+        md:w-40 s:w-20 md:h-24 s:h-20 
+}
+
+.icon-action-document {
+    @apply w-3.5 h-3.5
+}

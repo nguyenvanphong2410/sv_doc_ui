@@ -1,0 +1,116 @@
+.cardDocumentWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+  height: calc(100vh - 371px);
+  overflow-y: auto;
+
+  .cardDocument {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 5px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fff;
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    }
+  }
+
+  .imgDocument {
+    flex: 0 0 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    img {
+      width: 64px;
+      height: 64px;
+      border-radius: 8px;
+      border-width: 3px;
+      object-fit: cover;
+      --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+      --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+      box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+      --tw-border-opacity: 1;
+      border-color: rgb(255 255 255 / var(--tw-border-opacity));
+    }
+  }
+  
+  .infoDocument {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .nameDocument {
+      font-size: 14px;
+      font-weight: 600;
+      color: #2b3241;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 90%;
+      cursor: pointer;
+    }
+
+    .quantityDocument {
+      font-size: 11px;
+      color: #5f6368;
+    }
+
+    .priceDocument {
+      font-size: 12px;
+      color: #bc491b;
+      font-weight: 700;
+    }
+
+  }
+
+  .textUpdate {
+    --tw-text-opacity: 1;
+    color: rgb(120 130 157 / var(--tw-text-opacity));
+    font-weight: normal !important;
+
+    @media (min-width: 768px) {
+      .md\:text-sm {
+        font-size: 0.875rem;
+      }
+    }
+
+    @media (min-width: 320px) {
+      .s\:text-xs {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}
+
+.customPagination {
+  margin-top: 12px;
+  margin-bottom: -10px;
+}
+
+@media only screen and (max-width: 767px) {
+
+  .cardDocumentWrap {
+    height: calc(100vh - 297px);
+  }
+
+  .customPagination {
+    padding-bottom: 10px !important;
+  }
+  
+}
+
+
+@media only screen and (max-width: 576px) {
+
+  .cardDocumentWrap {
+    height: calc(100vh - 295px);
+  }
+  
+}

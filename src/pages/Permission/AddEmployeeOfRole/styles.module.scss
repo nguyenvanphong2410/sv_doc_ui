@@ -1,0 +1,83 @@
+@import "../../../assets/scss/variables.scss";
+
+.employeesInWrap{
+    height: calc(100vh - 330px);
+    overflow: auto;
+    margin-top: 30px;
+
+    .employees{
+        .employeesContent{
+            padding: 10px;
+            border-bottom: 1px solid rgb(247, 244, 244);
+
+            .employeesWrap{
+                display: flex;
+                justify-content: space-between;
+
+                .employeesInfo{
+                    display: flex;
+
+                    .employeesNameWrap{
+                        margin-left: 5px;
+                        display: flex;
+
+                        .employeesName{
+                            color: #333333;
+                            font-weight: bold;
+                        }
+                    }
+                }
+
+                .employeesDelete{
+                    display: flex;
+                    align-items: center;
+                }
+
+                .employeesDelete:hover{
+                    color: $colorSecond;
+                    cursor: pointer;
+                }
+            }
+        }
+        .employeesContent:hover{
+            background-color: #fcfafa;
+        }
+    }
+
+    .nodataWrap{
+        height: calc(100vh - 330px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .nodata{
+            .iconDropbox{
+                display: flex;
+                justify-content: center;
+                margin-right: 8px;
+                font-size: 100px;
+                color: $colorGray;
+            }
+
+            .nodataContent{
+                margin-top: 20px;
+            }     
+        }
+    }
+}
+
+.employeesInWrapLoading{
+    height: calc(100vh - 615px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.noDataEmployeeWithoutRole {
+    margin: 30px auto;
+}
+
+.iconDelete {
+    color: #6b6a6a;
+    font-weight: 800;
+}

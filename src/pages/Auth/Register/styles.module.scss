@@ -1,0 +1,19 @@
+.emailVerifiedCode {
+  :global(.ant-input-group) {
+    @apply leading-[1];
+    :global(.ant-input-group-addon) {
+      @apply border-0 rounded-none bg-transparent p-0;
+    }
+  }
+  :global(.ant-input) {
+    @apply border-0 rounded-none bg-transparent p-0 text-xs md:text-sm;
+    &:focus,
+    &:hover {
+      @apply border-0 rounded-none shadow-none;
+    }
+    &:focus-within {
+      box-shadow: none;
+      @apply border-transparent shadow-none;
+    }
+  }
+}

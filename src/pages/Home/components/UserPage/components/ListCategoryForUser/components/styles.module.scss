@@ -1,0 +1,32 @@
+.categoriesActive {
+    margin: 16px 8px 0px;
+    border: solid 1px #101e6b;
+    border-radius: 6px;
+    padding: 8px;
+    display: inline-flex;
+    transition: all 0.2s ease;
+    color: #ffffff;
+    background-color: #101e6b;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.categoriesItem {
+    margin: 16px 8px 0px;
+    background-color: grey;
+    border: solid 1px ;
+    border-radius: 6px;
+    padding: 8px;
+    display: inline-flex;
+    transition: all 0.2s ease;
+    color: #ffffff;
+    background-color: grey;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}

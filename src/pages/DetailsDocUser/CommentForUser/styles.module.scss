@@ -1,0 +1,49 @@
+.commentTitle {
+  font-weight: 700;
+  font-size: 18px;
+  margin-top: 40px;
+  color: rgb(80, 78, 78);
+  margin-bottom: 10px;
+}
+
+.commentWrap {
+  max-height: 400px;
+  overflow-y: auto;
+
+}
+
+.commentText {
+  background-color: #f1f2f6;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 77%;
+
+  .nameUserComment {
+    color: rgb(54, 53, 53);
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+}
+
+
+.createComment {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.contentPopoverComment {
+  padding: 10px;
+  border-radius: 10px;
+
+  .actionComment {
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+
+    &:hover {
+      background-color: rgb(229, 235, 233);
+    }
+  }
+}
