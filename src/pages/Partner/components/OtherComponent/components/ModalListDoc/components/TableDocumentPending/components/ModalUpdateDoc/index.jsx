@@ -242,13 +242,13 @@ function ModalUpdateDoc() {
 
             <div className={`input-wrap`}>
               <div className="label-wrap">
-                <label className={`label-input`}>Danh mục</label>
+                <label className={`label-input`}>Thể loại</label>
               </div>
               <Select
                 className={'main-select w-full'}
                 mode="multiple"
                 allowClear
-                placeholder="Chọn danh mục"
+                placeholder="Chọn thể loại"
                 value={infoDocumentPending?.category_id}
                 onChange={(value) => handleChangeInputInfo(value, 'category_id')}
                 options={categoryOption}

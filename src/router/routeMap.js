@@ -43,7 +43,7 @@ export const routeMap = [
     permissions: [PERMISSIONS.SUPER_ADMIN, PERMISSIONS.LIST.LIST_DOCUMENT],
   },
   {
-    label: 'Quản lý danh mục',
+    label: 'Quản lý thể loại',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" height="16">
         <path
@@ -94,7 +94,7 @@ export const routeMap = [
     ),
     path: '/partners',
     routeActive: ['/partners'],
-    permissions: [PERMISSIONS.SUPER_ADMIN],
+    permissions: [PERMISSIONS.SUPER_ADMIN, PERMISSIONS.LIST.LIST_USER],
   },
   {
     label: 'Quản lý vai trò',

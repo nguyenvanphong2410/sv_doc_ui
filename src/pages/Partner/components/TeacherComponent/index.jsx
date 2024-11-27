@@ -22,7 +22,7 @@ function TeacherComponent() {
   const visibleModalCreateOrUpdateTeacher = useSelector(state => state.partner.visibleModalCreateOrUpdateTeacher)
   const configModalTeacher = useSelector(state => state.partner.configModalTeacher)
   const dataFilterTeacher = useSelector(state => state.partner.dataFilterTeacher)
-  const visibleModalChangePass = useSelector((state) => state.partner.visibleModalChangePass)
+  const visibleModalChangePassTeacher = useSelector((state) => state.partner.visibleModalChangePassTeacher)
 
   useEffect(() => {
     let dataBreadcrumb = [
@@ -109,7 +109,7 @@ function TeacherComponent() {
           <div>
 
             {
-              hasPermission([PERMISSIONS.ADD.ADD_CATEGORY]) &&
+              hasPermission([PERMISSIONS.ADD.ADD_TEACHER]) &&
               <>
                 <Button
                   icon={<InlineSVG src={PlusIcon} className={`w-4 h-4`} />}
@@ -140,7 +140,7 @@ function TeacherComponent() {
         </ModalDefault>
 
         <ModalDefault
-            isModalOpen={visibleModalChangePass}
+            isModalOpen={visibleModalChangePassTeacher}
             handleCancel={handleCancelModalChangePass}
             title="Đổi mật khẩu"
           >

@@ -34,7 +34,7 @@ function Document() {
     },
     {
       key: '2',
-      label: 'Danh mục',
+      label: 'Thể loại',
       children: <CategoryItem/>,
     },
   ];

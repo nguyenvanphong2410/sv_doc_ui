@@ -14,7 +14,7 @@ import {
   setDataFilterOther,
   setErrorInfoOther,
   setInfoOther,
-  setVisibleModalChangePass,
+  setVisibleModalChangePassOther,
   setVisibleModalCreateOrUpdateOther,
   setVisibleModalListDocOther,
 } from '@/states/modules/partner';
@@ -94,7 +94,7 @@ function TableOther() {
         );
       },
     },
-    hasPermission([PERMISSIONS.EDIT.EDIT_EMPLOYEE])
+    hasPermission([PERMISSIONS.EDIT.EDIT_OTHER])
       ? {
           title: <span className="title-table">Trạng thái</span>,
           dataIndex: 'status',
@@ -119,7 +119,7 @@ function TableOther() {
       : {
           width: 1,
         },
-    hasPermission([PERMISSIONS.EDIT.EDIT_CATEGORY, PERMISSIONS.DELETE.DELETE_CATEGORY])
+    hasPermission([PERMISSIONS.EDIT.EDIT_OTHER, PERMISSIONS.DELETE.DELETE_OTHER])
       ? {
           title: <span className="title-table">Hoạt động</span>,
           dataIndex: 'actions',
@@ -130,7 +130,7 @@ function TableOther() {
           render: (text, record) => {
             return (
               <div className={`flex w-full justify-center bg-white`}>
-                {hasPermission([PERMISSIONS.EDIT.EDIT_EMPLOYEE]) && (
+                {hasPermission([PERMISSIONS.EDIT.EDIT_OTHER]) && (
                   <div
                     className={`action-user mr-2`}
                     onClick={() => handleShowModalUpdateOther(record, TYPE_SUBMIT.UPDATE)}
@@ -141,7 +141,7 @@ function TableOther() {
                   </div>
                 )}
 
-                {hasPermission([PERMISSIONS.EDIT.EDIT_RESET_PASSWORD_EMPLOYEE]) && (
+                {hasPermission([PERMISSIONS.EDIT.EDIT_RESET_PASSWORD_OTHER]) && (
                   <Tooltip title="Đổi mật khẩu">
                     <div
                       className={`action-user mr-2`}
@@ -152,7 +152,7 @@ function TableOther() {
                   </Tooltip>
                 )}
 
-                {hasPermission([PERMISSIONS.DELETE.DELETE_CATEGORY]) && (
+                {hasPermission([PERMISSIONS.DELETE.DELETE_OTHER]) && (
                   <div className={`action-user`} onClick={() => handleDeleteOtherAlert(record)}>
                     <Tooltip title="Xóa thông tin">
                       <InlineSVG src={IconDeleteTable} className={`w-[16px] h-[16px]`} alt="" />
@@ -228,7 +228,7 @@ function TableOther() {
 
   const handleShowModalChangePassEmployee = (other) => {
     dispatch(setDataChangePassOther({_id: other._id}));
-    dispatch(setVisibleModalChangePass(true));
+    dispatch(setVisibleModalChangePassOther(true));
   };
 
   const handleUpdateStatusOther = (other) => {

@@ -16,7 +16,7 @@ import {getNotification} from "@/utils/helper";
 import { getListCategories } from "@/api/category";
 
 function* loadRouteData() {
-  yield put(setTitlePage("Quản lý tài liệu"));
+  yield put(setTitlePage("Quản lý thể loại"));
   yield put(setDataFilterCategory({
     keySearch: "",
     perPage: 20,
@@ -35,7 +35,7 @@ function* handleActions() {
   yield takeLatest(createCategorySuccess, function* () {
     yield put(getListCategories());
     yield put(setVisibleModalCreateOrUpdateCategory(false));
-    getNotification("success", "Tạo mới danh mục thành công.");
+    getNotification("success", "Tạo mới thể loại thành công.");
   });
   
   yield takeLatest(createCategoryFail, function* (action) {
@@ -48,14 +48,14 @@ function* handleActions() {
         })
       );
     } else {
-      getNotification("error", "Tạo mới danh mục thất bại.");
+      getNotification("error", "Tạo mới thể loại thất bại.");
     }
   });
   
   yield takeLatest(updateCategorySuccess, function* () {
     yield put(getListCategories());
     yield put(setVisibleModalCreateOrUpdateCategory(false));
-    getNotification("success", "Cập nhật danh mục thành công.");
+    getNotification("success", "Cập nhật thể loại thành công.");
   });
   
   yield takeLatest(updateCategoryFail, function* (action) {
@@ -68,7 +68,7 @@ function* handleActions() {
         })
       );
     } else {
-      getNotification("error", "Cập nhật danh mục thất bại.");
+      getNotification("error", "Cập nhật thể loại thất bại.");
     }
   });
   
@@ -79,12 +79,12 @@ function* handleActions() {
     if (currentPage !== 1 && totalRecord % perPage === 1) {
       yield put(setDataFilterCategory({...categoryState.dataFilter, page: currentPage - 1}));
     }
-    getNotification("success", "Xoá danh mục thành công.");
+    getNotification("success", "Xoá thể loại thành công.");
     yield put(getListCategories());
   });
   
   yield takeLatest(deleteCategoryFail, function* () {
-    yield call(getNotification, "error", "Xoá danh mục thất bại.");
+    yield call(getNotification, "error", "Xoá thể loại thất bại.");
   });
 }
 

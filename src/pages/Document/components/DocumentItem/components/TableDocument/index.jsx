@@ -158,7 +158,33 @@ function TableDocument({handleChangeTableDocument}) {
         );
       },
     },
-   
+    {
+      title: <span className="title-table">Trạng thái</span>,
+      dataIndex: 'doc_check',
+      key: 'doc_check',
+      align: 'center',
+      width: 120,
+      sorter: (a, b) => a.age - b.age,
+      showSorterTooltip: false,
+      defaultSortOrder: '',
+      render: (text, record) => {
+        return (
+          <div className={`flex w-full justify-center bg-white cursor-pointer`}>
+            <span>
+              {record.doc_check === STATUS_DOC_CHECK.PENDING ? (
+                <Tooltip title="Tài liệu chờ phê duyệt">
+                  <Tag color="yellow">Chờ duyệt</Tag>
+                </Tooltip>
+              ) : (
+                <Tooltip title="Tài liệu đã được phê duyệt">
+                  <Tag color="green">Đã duyệt</Tag>
+                </Tooltip>
+              )}
+            </span>
+          </div>
+        );
+      },
+    },
     {
       title: <span className="title-table">Lượt xem</span>,
       dataIndex: 'view_quantity',
@@ -169,7 +195,7 @@ function TableDocument({handleChangeTableDocument}) {
       showSorterTooltip: false,
       defaultSortOrder: '',
       render: (text) => {
-        return text ? <span>{text}</span> : 0
+        return text ? <span>{text}</span> : 0;
       },
     },
 

@@ -95,12 +95,21 @@ export const PERMISSIONS = {
     LIST_EMPLOYEE: 'list-employee',
     LIST_ROLE: 'list-role',
     LIST_PERMISSION: 'list-permission',
+    LIST_USER: 'list-user',
+
+    LIST_MANAGEMENT_TEACHER: 'list-management-teacher',
+    LIST_MANAGEMENT_STUDENT: 'list-management-student',
+    LIST_MANAGEMENT_OTHER: 'list-management-other',
   },
   ADD: {
     ADD_DOCUMENT: 'add-document',
     ADD_CATEGORY: 'add-category',
     ADD_EMPLOYEE: 'add-employee',
     ADD_ROLE: 'add-role',
+
+    ADD_TEACHER: 'add-management-teacher',
+    ADD_STUDENT: 'add-management-student',
+    ADD_OTHER: 'add-management-other'
   },
   EDIT: {
     EDIT_DOCUMENT: 'edit-document',
@@ -110,6 +119,14 @@ export const PERMISSIONS = {
     EDIT_ROLE: 'edit-role',
     EDIT_PERMISSION: 'edit-permission',
     EDIT_EMPLOYEE_ROLE: 'edit-employee-role',
+
+    EDIT_TEACHER: 'edit-management-teacher',
+    EDIT_STUDENT: 'edit-management-student',
+    EDIT_OTHER: 'edit-management-other',
+
+    EDIT_RESET_PASSWORD_TEACHER: 'edit-reset-password-teacher',
+    EDIT_RESET_PASSWORD_STUDENT: 'edit-reset-password-student',
+    EDIT_RESET_PASSWORD_OTHER: 'edit-reset-password-other',
   },
   DELETE: {
     DELETE_DOCUMENT: 'delete-document',
@@ -117,6 +134,10 @@ export const PERMISSIONS = {
     DELETE_EMPLOYEE: 'delete-employee',
     DELETE_ROLE: 'delete-role',
     DELETE_EMPLOYEE_ROLE: 'delete-employee-role',
+
+    DELETE_TEACHER: 'delete-management-teacher',
+    DELETE_STUDENT: 'delete-management-student',
+    DELETE_OTHER: 'delete-management-other',
   },
   RESET_PASSWORD: {
     ADMIN: 'reset-password-admin',

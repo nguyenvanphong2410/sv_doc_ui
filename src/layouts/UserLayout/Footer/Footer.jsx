@@ -30,7 +30,7 @@ const Footer = () => {
             <p className={styles.textTwoInfo}>
 
             </p>
-            <p className={styles.textTwo}> Vũ trọng Giáp - K64ATTT - 64....</p>
+            <p className={styles.textTwo}> Vũ Trọng Giáp - K64ATTT - 646526</p>
             <p className={styles.textTwo}> <MailOutlined /> vutronggiap@gmail.com</p>
             <p className={styles.textTwo}> <PhoneOutlined  /> 0362800787</p>
           </div>
