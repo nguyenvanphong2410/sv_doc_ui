@@ -11,7 +11,7 @@ import { hasPermission } from '@/utils/helper'
 import ModalCreateOrUpdate from './components/ModalCreateOrUpdate'
 import { setBreadcrumb } from '@/states/modules/app'
 import TableOther from './components/TableOther'
-import { setConfigModalOther, setDataChangePassOther, setDataFilterOther, setErrorDataChangePassOther, setInfoOther, setVisibleModalChangePass, setVisibleModalCreateOrUpdateOther } from '@/states/modules/partner'
+import { setConfigModalOther, setDataChangePassOther, setDataFilterOther, setErrorDataChangePassOther, setInfoOther, setVisibleModalChangePassOther, setVisibleModalCreateOrUpdateOther } from '@/states/modules/partner'
 import { initInfoPartner } from '@/states/modules/partner/initState'
 import { requestGetListOther } from '@/api/partners'
 import ModalChangePassOther from './components/ModalChangePass'
@@ -22,7 +22,7 @@ function OtherComponent() {
   const visibleModalCreateOrUpdateOther = useSelector(state => state.partner.visibleModalCreateOrUpdateOther)
   const configModalOther = useSelector(state => state.partner.configModalOther)
   const dataFilterOther = useSelector(state => state.partner.dataFilterOther)
-  const visibleModalChangePass = useSelector((state) => state.partner.visibleModalChangePass)
+  const visibleModalChangePassOther = useSelector((state) => state.partner.visibleModalChangePassOther)
 
   useEffect(() => {
     let dataBreadcrumb = [
@@ -88,7 +88,7 @@ function OtherComponent() {
         confirm_password: '',
       })
     )
-    dispatch(setVisibleModalChangePass(false))
+    dispatch(setVisibleModalChangePassOther(false))
   }
 
   return (
@@ -109,7 +109,7 @@ function OtherComponent() {
           <div>
 
             {
-              hasPermission([PERMISSIONS.ADD.ADD_CATEGORY]) &&
+              hasPermission([PERMISSIONS.ADD.ADD_OTHER]) &&
               <>
                 <Button
                   icon={<InlineSVG src={PlusIcon} className={`w-4 h-4`} />}
@@ -140,7 +140,7 @@ function OtherComponent() {
         </ModalDefault>
 
         <ModalDefault
-            isModalOpen={visibleModalChangePass}
+            isModalOpen={visibleModalChangePassOther}
             handleCancel={handleCancelModalChangePass}
             title="Đổi mật khẩu"
           >

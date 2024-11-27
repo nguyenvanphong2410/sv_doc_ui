@@ -9,7 +9,7 @@ export const createCategorySchema = Joi.object({
       .trim()
       .max(MAX_STRING_SIZE)
       .required()
-      .label("Tên danh mục"),
+      .label("Tên thể loại"),
   description: Joi.string()
       .allow(null, "")
       .label("Mô tả phòng"),
@@ -20,7 +20,7 @@ export const updateCategorySchema = Joi.object({
       .trim()
       .max(MAX_STRING_SIZE)
       .required()
-      .label("Tên danh mục"),
+      .label("Tên thể loại"),
   description: Joi.string()
       .allow(null, "")
       .label("Mô tả"),

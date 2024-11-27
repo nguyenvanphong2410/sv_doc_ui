@@ -27,7 +27,7 @@ function ModalCreateOrUpdateCategory() {
       <div className={`input-wrap`}>
         <div className="label-wrap">
           <label className={`required label-input`}>
-            Tên danh mục
+            Tên thể loại
           </label>
         </div>
         <Input
@@ -35,7 +35,7 @@ function ModalCreateOrUpdateCategory() {
           onFocus={() => handleFocus('name')}
           onChange={(e) => handleChangeInputInfo(e, 'name')}
           className={`main-input ${errorInfoCategory && errorInfoCategory.name ? 'error-input' : ''}`}
-          placeholder={'Nhập danh mục'}
+          placeholder={'Nhập thể loại'}
         />
         {
           errorInfoCategory && errorInfoCategory.name &&
@@ -59,7 +59,7 @@ function ModalCreateOrUpdateCategory() {
           onFocus={() => handleFocus('desc')}
           onChange={(e) => handleChangeInputInfo(e, 'desc')}
           className={`main-input ${errorInfoCategory && errorInfoCategory.desc ? 'error-input' : ''}`}
-          placeholder={'Nhập mô danh mục'}
+          placeholder={'Nhập mô thể loại'}
         />
         {
           errorInfoCategory && errorInfoCategory.desc &&

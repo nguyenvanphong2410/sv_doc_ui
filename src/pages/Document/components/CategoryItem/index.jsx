@@ -53,7 +53,7 @@ function CategoryItem() {
               onChange={(e) => handleSearchCategory(e.target.value)}
               prefix={<InlineSVG src={SearchIcon} className={`icon-search`} alt="" />}
               className={`main-input`}
-              placeholder="Tìm kiếm theo tên danh mục"
+              placeholder="Tìm kiếm theo tên thể loại"
             />
           </div>
 

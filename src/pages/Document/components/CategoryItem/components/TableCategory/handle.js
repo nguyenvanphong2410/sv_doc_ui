@@ -18,7 +18,7 @@ export default function Handle() {
     dispatch(setInfoCategory(category));
     dispatch(
       setConfigModalCategory({
-        title: 'Cập nhật thông tin danh mục',
+        title: 'Cập nhật thông tin thể loại',
         type,
       })
     );
@@ -68,7 +68,7 @@ export default function Handle() {
   const handleDeleteCategoryAlert = (record) => {
     return Swal.fire({
       title: `<p class="title-modal-warning">
-        Bạn có chắn chắn muốn xóa danh mục <strong>${record.name}</strong> không?
+        Bạn có chắn chắn muốn xóa thể loại <strong>${record.name}</strong> không?
       </p>`,
       icon: 'warning',
       showCancelButton: true,

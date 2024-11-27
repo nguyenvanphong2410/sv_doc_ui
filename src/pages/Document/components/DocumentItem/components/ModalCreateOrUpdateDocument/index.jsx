@@ -116,14 +116,14 @@ function ModalCreateOrUpdateDocument() {
 
             <div className={`input-wrap`}>
               <div className="label-wrap">
-                <label className={`label-input`}>Danh mục</label>
+                <label className={`label-input`}>Thể loại</label>
               </div>
               <Select
                 className={'main-select w-full'}
                 value={infoDocument?.category_id}
                 mode="multiple"
                 allowClear
-                placeholder="Chọn danh mục"
+                placeholder="Chọn thể loại"
                 onChange={(value) => handleChangeInputInfo(value, 'category_id')}
                 options={categoryOption}
                 filterOption={(input, option) =>

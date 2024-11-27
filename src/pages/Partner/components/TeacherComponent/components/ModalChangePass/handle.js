@@ -1,5 +1,5 @@
 import { handleChangePassTeacher } from '@/api/partners'
-import { setDataChangePassTeacher, setErrorDataChangePassTeacher, setVisibleModalChangePass } from '@/states/modules/partner'
+import { setDataChangePassTeacher, setErrorDataChangePassTeacher, setVisibleModalChangePassTeacher } from '@/states/modules/partner'
 import { TYPE_SUBMIT } from '@/utils/constants'
 import { validate } from '@/utils/validates'
 import _ from 'lodash'
@@ -47,7 +47,7 @@ export default function Handle() {
         confirm_password: '',
       })
     )
-    dispatch(setVisibleModalChangePass(false))
+    dispatch(setVisibleModalChangePassTeacher(false))
   }
   
   return {

@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 function Category() {
   const dispatch = useDispatch();
   useEffect(() => {
-    document.title = "SV.Doc - Danh mục";
+    document.title = "SV.Doc - Thể loại";
     dispatch(getListCategories())
   }, []);
 

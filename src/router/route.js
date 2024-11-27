@@ -75,7 +75,7 @@ const router = createBrowserRouter([
     path: '/partners',
     element: <Partner />,
     loader: ({request, params}) =>
-      rootLoader({request, params}, true, 'LOAD_PARTNERS_PAGE', [PERMISSIONS.SUPER_ADMIN]),
+      rootLoader({request, params}, true, 'LOAD_PARTNERS_PAGE', [PERMISSIONS.SUPER_ADMIN, PERMISSIONS.LIST.LIST_USER]),
   },
   {
     path: '/category',

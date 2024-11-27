@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import styles from './styles.module.scss';
-import {Card, Col, Row} from 'antd';
+import {Badge, Card, Col, Row} from 'antd';
 import {CheckCircleOutlined, FieldTimeOutlined, ProfileOutlined, UserOutlined} from '@ant-design/icons';
 import {
   BarChart,
@@ -81,7 +81,7 @@ const Dashboard = () => {
 
   //Tron User
   const dataPieUser = [
-    {name: 'Cán bộ', value: listDashboard.total_teacher},
+    {name: 'Giáo viên', value: listDashboard.total_teacher},
     {name: 'Sinh viên', value: listDashboard.total_student},
     {name: 'Người dùng khác', value: listDashboard.total_other},
   ];
@@ -125,6 +125,7 @@ const Dashboard = () => {
 
   return (
     <>
+    
       <div className={`${styles.dashboardContainer}`}>
         <div className={styles.overViewWrap}>
           <div className={styles.totalWrap}>
@@ -156,7 +157,7 @@ const Dashboard = () => {
                       <div className={`${styles.widgetIcon}`}>
                         <ProfileOutlined />
                       </div>
-                      <h6 className={styles.title}>Tổng số danh mục</h6>
+                      <h6 className={styles.title}>Tổng số thể loại</h6>
                       <h2 className={styles.subTitle}>{listDashboard.total_category}</h2>
                     </div>
                   </Card>
@@ -235,6 +236,15 @@ const Dashboard = () => {
                   <div className={styles.namePie}>
                     <span className={styles.textName}> Biều đồ thống kế người dùng</span>
                   </div>
+                  <div className="">
+                    <Badge color="#804f14" text="Giáo viên" />
+                  </div>
+                  <div>
+                    <Badge color="#c17d28" text="Sinh viên" />
+                  </div>
+                  <div>
+                    <Badge color="#efac5d" text="Người dùng khác" />
+                  </div>
                 </div>
               </Col>
               <Col span={6}>
@@ -258,20 +268,16 @@ const Dashboard = () => {
                   </div>
                   <div className={styles.namePie}>
                     <span className={styles.textName}> Biều đồ thống kế tài liệu</span>
-                    {/* <div className={styles.wrapNote}>
-                      <div className={styles.itemNote}>
-                        <span className={styles.circlePending}></span>
-                        <span className={styles.textPending}>Tài liệu chờ duyệt</span>
-                      </div>
-                      <div className={styles.itemNote}>
-                        <span className={styles.circleChecked}></span>
-                        <span className={styles.textChecked}>Tài liệu đã duyệt</span>
-                      </div>
-                      <div className={styles.itemNote}>
-                        <span className={styles.circleChecked}></span>
-                        <span className={styles.textChecked}>Tài liệu đã duyệt</span>
-                      </div>
-                    </div> */}
+                  </div>
+
+                  <div className="">
+                    <Badge color="#052b50" text="Tài liệu đã duyệt" />
+                  </div>
+                  <div>
+                    <Badge color="#1c538b" text="Tài liệu chờ duyệt" />
+                  </div>
+                  <div>
+                    <Badge color="#4e8ac9" text="Tài liệu khóa" />
                   </div>
                 </div>
               </Col>

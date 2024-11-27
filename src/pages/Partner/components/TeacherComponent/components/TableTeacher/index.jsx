@@ -14,7 +14,7 @@ import {
   setDataFilterTeacher,
   setErrorInfoTeacher,
   setInfoTeacher,
-  setVisibleModalChangePass,
+  setVisibleModalChangePassTeacher,
   setVisibleModalCreateOrUpdateTeacher,
   setVisibleModalListDocTeacher,
 } from '@/states/modules/partner';
@@ -94,7 +94,7 @@ function TableTeacher() {
         );
       },
     },
-    hasPermission([PERMISSIONS.EDIT.EDIT_EMPLOYEE])
+    hasPermission([PERMISSIONS.EDIT.EDIT_TEACHER])
       ? {
           title: <span className="title-table">Trạng thái</span>,
           dataIndex: 'status',
@@ -119,7 +119,7 @@ function TableTeacher() {
       : {
           width: 1,
         },
-    hasPermission([PERMISSIONS.EDIT.EDIT_CATEGORY, PERMISSIONS.DELETE.DELETE_CATEGORY])
+    hasPermission([PERMISSIONS.EDIT.EDIT_TEACHER, PERMISSIONS.DELETE.DELETE_TEACHER])
       ? {
           title: <span className="title-table">Hoạt động</span>,
           dataIndex: 'actions',
@@ -130,7 +130,7 @@ function TableTeacher() {
           render: (text, record) => {
             return (
               <div className={`flex w-full justify-center bg-white`}>
-                {hasPermission([PERMISSIONS.EDIT.EDIT_EMPLOYEE]) && (
+                {hasPermission([PERMISSIONS.EDIT.EDIT_TEACHER]) && (
                   <div
                     className={`action-user mr-2`}
                     onClick={() => handleShowModalUpdateTeacher(record, TYPE_SUBMIT.UPDATE)}
@@ -141,7 +141,7 @@ function TableTeacher() {
                   </div>
                 )}
 
-                {hasPermission([PERMISSIONS.EDIT.EDIT_RESET_PASSWORD_EMPLOYEE]) && (
+                {hasPermission([PERMISSIONS.EDIT.EDIT_RESET_PASSWORD_TEACHER]) && (
                   <Tooltip title="Đổi mật khẩu">
                     <div
                       className={`action-user mr-2`}
@@ -152,7 +152,7 @@ function TableTeacher() {
                   </Tooltip>
                 )}
 
-                {hasPermission([PERMISSIONS.DELETE.DELETE_CATEGORY]) && (
+                {hasPermission([PERMISSIONS.DELETE.DELETE_TEACHER]) && (
                   <div className={`action-user`} onClick={() => handleDeleteTeacherAlert(record)}>
                     <Tooltip title="Xóa thông tin">
                       <InlineSVG src={IconDeleteTable} className={`w-[16px] h-[16px]`} alt="" />
@@ -228,7 +228,7 @@ function TableTeacher() {
 
   const handleShowModalChangePassEmployee = (other) => {
     dispatch(setDataChangePassTeacher({_id: other._id}));
-    dispatch(setVisibleModalChangePass(true));
+    dispatch(setVisibleModalChangePassTeacher(true));
   };
 
   const handleUpdateStatusTeacher = (other) => {

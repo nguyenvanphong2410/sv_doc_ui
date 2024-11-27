@@ -23,7 +23,7 @@ function TableCategory() {
 
   const columns = [
     {
-      title: <span className='title-table'>Tên danh mục</span>,
+      title: <span className='title-table'>Tên thể loại</span>,
       dataIndex: 'name',
       key: 'name',
       width: 250,

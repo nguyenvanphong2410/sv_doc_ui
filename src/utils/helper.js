@@ -9,10 +9,11 @@ import warning from '@/assets/images/icons/notification/warning_16x16.svg';
 import Swal from 'sweetalert2';
 
 import dayjs from 'dayjs';
-import relativeTime from "dayjs/plugin/relativeTime";
-import localizedFormat from "dayjs/plugin/localizedFormat";
-dayjs.extend(relativeTime);
-dayjs.extend(localizedFormat);
+import 'dayjs/locale/vi'; // Nhập ngôn ngữ tiếng Việt
+import relativeTime from 'dayjs/plugin/relativeTime'; // Nhập plugin relativeTime
+dayjs.extend(relativeTime); // Kích hoạt plugin relativeTime
+dayjs.locale('vi'); // Thiết lập ngôn ngữ là tiếng Việt
+
 
 export const VALIDATE_EMAIL_REGEX = /^[a-zA-Z0-9][a-zA-Z0-9_.+-]{1,}@[a-z0-9]{1,}(\.[a-z0-9]{1,}){1,2}$/;
 export const VALIDATE_PASSWORD_REGEX = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{6,50}$/;

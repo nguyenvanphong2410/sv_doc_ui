@@ -79,7 +79,7 @@ export default function Handle() {
   const handleShowModalCreateCategory = () => {
     dispatch(
       setConfigModalCategory({
-        title: 'Tạo mới danh mục',
+        title: 'Tạo mới thể loại',
         type: TYPE_SUBMIT.CREATE,
       })
     );

@@ -22,7 +22,7 @@ function StudentComponent() {
   const visibleModalCreateOrUpdateStudent = useSelector(state => state.partner.visibleModalCreateOrUpdateStudent)
   const configModalStudent = useSelector(state => state.partner.configModalStudent)
   const dataFilterStudent = useSelector(state => state.partner.dataFilterStudent)
-  const visibleModalChangePass = useSelector((state) => state.partner.visibleModalChangePass)
+  const visibleModalChangePassStudent = useSelector((state) => state.partner.visibleModalChangePassStudent)
 
   useEffect(() => {
     let dataBreadcrumb = [
@@ -109,7 +109,7 @@ function StudentComponent() {
           <div>
 
             {
-              hasPermission([PERMISSIONS.ADD.ADD_CATEGORY]) &&
+              hasPermission([PERMISSIONS.ADD.ADD_STUDENT]) &&
               <>
                 <Button
                   icon={<InlineSVG src={PlusIcon} className={`w-4 h-4`} />}
@@ -140,7 +140,7 @@ function StudentComponent() {
         </ModalDefault>
 
         <ModalDefault
-            isModalOpen={visibleModalChangePass}
+            isModalOpen={visibleModalChangePassStudent}
             handleCancel={handleCancelModalChangePass}
             title="Đổi mật khẩu"
           >

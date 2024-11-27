@@ -1,7 +1,6 @@
 import {all, fork, put, select, takeLatest} from 'redux-saga/effects';
 import {setTitlePage} from '../app';
 import {
-  changePassWordOtherFail,
   changePassWordOtherSuccess,
   changePassWordStudentFail,
   changePassWordStudentSuccess,
@@ -34,7 +33,7 @@ import {
   setErrorInfoOther,
   setErrorInfoStudent,
   setErrorInfoTeacher,
-  setVisibleModalChangePass,
+  setVisibleModalChangePassOther,
   setVisibleModalChangePassStudent,
   setVisibleModalChangePassTeacher,
   setVisibleModalCreateOrUpdateOther,
@@ -118,6 +117,24 @@ function* handleActions() {
   yield takeLatest(changeStatusOtherFail, function () {
     getNotification("success", "Thay đổi trạng thái thất bại.");
   });
+
+  yield takeLatest(changePassWordOtherSuccess, function* () {
+    yield put(setVisibleModalChangePassOther(false));
+    getNotification("success", "Thay đổi mật khẩu thành công.");
+  });
+  
+  yield takeLatest(changePassWordTeacherFail, function* (action) {
+    let status = action.payload.status;
+    if (status === 400) {
+      let errors = action.payload.data.detail;
+      yield put(
+        setErrorDataChangePassOther({
+          ...errors,
+        })
+      );
+    }
+    getNotification("error", "Thay đổi mật khẩu thất bại.");
+  });
   
 
   //Teacher
@@ -176,17 +193,17 @@ function* handleActions() {
     getNotification('error', 'Xoá giáo viên thất bại.');
   });
 
-  yield takeLatest(changePassWordOtherSuccess, function* () {
+  yield takeLatest(changePassWordTeacherSuccess, function* () {
+    yield put(setVisibleModalChangePassTeacher(false));
     getNotification("success", "Thay đổi mật khẩu thành công.");
-    yield put(setVisibleModalChangePass(false));
   });
   
-  yield takeLatest(changePassWordOtherFail, function* (action) {
+  yield takeLatest(changePassWordTeacherFail, function* (action) {
     let status = action.payload.status;
     if (status === 400) {
       let errors = action.payload.data.detail;
       yield put(
-        setErrorDataChangePassOther({
+        setErrorDataChangePassTeacher({
           ...errors,
         })
       );

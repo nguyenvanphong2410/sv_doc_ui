@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import styles from './styles.module.scss';
 import {Card, Col, Image, Row, Tooltip} from 'antd';
 import {Link, useNavigate} from 'react-router-dom';
-import {DownloadOutlined, EyeOutlined, FieldTimeOutlined, ProfileOutlined} from '@ant-design/icons';
+import {DownloadOutlined, EyeOutlined, FieldTimeOutlined, ProfileOutlined, UserOutlined} from '@ant-design/icons';
 import Meta from 'antd/es/card/Meta';
 import imageDefaultDocument from '@/assets/images/document/image-default.png';
 import PaginationDocument from '../Panigation';
@@ -28,15 +28,15 @@ const CardDoc = () => {
         <Row gutter={[20, 60]}>
           {dataListDocuments.map((item, index) => {
             return (
-              <Col key={index} xs={24} sm={24} md={12} lg={6}>
+              <Col key={index} xs={24} sm={24} md={12} lg={12}>
                 <div>
                   <Card
                     className={styles.cardItem}
-                    style={{width: window.innerWidth < 576 ? 300 : 250}}
+                    style={{width: window.innerWidth < 576 ? 300 : 600}}
                     cover={
                       <Image
-                        height={170}
-                        width={window.innerWidth < 576 ? 300 : 250}
+                        height={330}
+                        width={window.innerWidth < 576 ? 300 : 600}
                         src={item.images_src[0] ? item.images_src[0] : imageDefaultDocument}
                         preview={false}
                         onClick={() => handleViewDetailsForUser(item)}
@@ -100,12 +100,20 @@ const CardDoc = () => {
                               </span>
                             </span>
                           </div>
+                          <div className={styles.itemCard}>
+                            <span>
+                              <UserOutlined className={styles.iconOriginCard} />
+                              <span className={styles.textOriginCard}> Tác giả: </span>
+                              <span className={styles.infoOriginCard}>{item?.author ? item?.author : <span className='italic'>Đang cập nhật</span> }</span>
 
-                          {/* <div className={styles.itemCard}>
-                            <UserOutlined className={styles.iconOriginCard} />
-                            <span className={styles.textOriginCard}> Người đăng: </span>
-                            <span className={styles.infoOriginCard}>{item?.creator.name}</span>
-                          </div> */}
+                            </span>
+                          </div>
+
+                          <div className={styles.itemCard}>
+                            {/* <UserOutlined className={styles.iconOriginCard} /> */}
+                            <span className={styles.textOriginCard}> Mô tả: </span>
+                            <span className={styles.infoOriginCard}>{item?.description ? item?.description : <span className='italic'>Đang cập nhật</span> }</span>
+                          </div>
                         </div>
                       }
                     />

@@ -16,7 +16,7 @@ const partnerSlice = createSlice({
     isLoadingBtnDeleteOther: false,
     visibleModalCreateOrUpdateOther: false,
     isLoadingBtnChangePassWordOther: false,
-    visibleModalChangePass: false,
+    visibleModalChangePassOther: false,
     visibleModalListDocOther: false,
 
     infoOther: initInfoPartner,
@@ -41,7 +41,7 @@ const partnerSlice = createSlice({
     isLoadingBtnDeleteTeacher: false,
     visibleModalCreateOrUpdateTeacher: false,
     visibleModalListDocTeacher: false,
-
+    visibleModalChangePassTeacher: false,
 
     infoTeacher: initInfoPartner,
     errorInfoTeacher: initInfoPartner,
@@ -65,6 +65,7 @@ const partnerSlice = createSlice({
     isLoadingBtnDeleteStudent: false,
     visibleModalCreateOrUpdateStudent: false,
     visibleModalListDocStudent: false,
+    visibleModalChangePassStudent: false,
 
     infoStudent: initInfoPartner,
     errorInfoStudent: initInfoPartner,
@@ -193,9 +194,9 @@ const partnerSlice = createSlice({
       ...state,
       errorDataChangePassOther: action.payload,
     }),
-    setVisibleModalChangePass: (state, action) => ({
+    setVisibleModalChangePassOther: (state, action) => ({
       ...state,
-      visibleModalChangePass: action.payload,
+      visibleModalChangePassOther: action.payload,
     }),
     setVisibleModalListDocOther: (state, action) => ({
       ...state,
@@ -301,6 +302,7 @@ const partnerSlice = createSlice({
     changePassWordTeacherSuccess: (state) => ({
       ...state,
       isLoadingBtnChangePassWordTeacher: false,
+      visibleModalChangePassTeacher: false,
     }),
     changePassWordTeacherFail: (state) => ({
       ...state,
@@ -316,7 +318,7 @@ const partnerSlice = createSlice({
     }),
     setVisibleModalChangePassTeacher: (state, action) => ({
       ...state,
-      visibleModalChangePass: action.payload,
+      visibleModalChangePassTeacher: action.payload,
     }),
     setVisibleModalListDocTeacher: (state, action) => ({
       ...state,
@@ -437,7 +439,7 @@ const partnerSlice = createSlice({
     }),
     setVisibleModalChangePassStudent: (state, action) => ({
       ...state,
-      visibleModalChangePass: action.payload,
+      visibleModalChangePassStudent: action.payload,
     }),
     setVisibleModalListDocStudent: (state, action) => ({
       ...state,
@@ -480,7 +482,7 @@ export const {
   changePassWordOtherFail,
   setDataChangePassOther,
   setErrorDataChangePassOther,
-  setVisibleModalChangePass,
+  setVisibleModalChangePassOther,
   setVisibleModalListDocOther,
 
   //Teacher
