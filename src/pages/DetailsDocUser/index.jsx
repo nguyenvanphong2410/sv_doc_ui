@@ -12,7 +12,7 @@ import InfoDetailsDocForUser from './InfoDetailsDocForUser';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 import PageError from '@/components/Error';
-import {PAGE_ERROR} from '@/utils/constants';
+import {PAGE_ERROR, TYPE_SAVE} from '@/utils/constants';
 import CommentForUser from './CommentForUser';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
@@ -45,6 +45,25 @@ function DetailsDocUser() {
       children: <TrendCardDocForUser />,
     },
   ];
+
+  const displayItem = () => {
+    return documentDetails?.chapters?.map((item, index) => ({
+      key: index + 1,
+      label: item.name,
+      children: (
+        <div className={`${styles.viewPdf}`}>
+          <div className={styles.pdfContainer}>
+            <Document file={item?.file_chapter} onLoadSuccess={onDocumentLoadSuccess}>
+              {Array.from(new Array(numPages), (el, idx) => (
+                <Page className={styles.page} key={`page_${idx + 1}`} pageNumber={idx + 1} />
+              ))}
+            </Document>
+          </div>
+          <CommentForUser />
+        </div>
+      ),
+    }));
+  };
 
 
 
@@ -79,22 +98,22 @@ function DetailsDocUser() {
                     </>
                   ))}
                 </div>
-                <div className={`${styles.viewPdf}`}>
-                  {/* <p style={{fontSize: '20px', fontWeight: 'bold', marginBottom: '20px'}}>
-                Page {pageNumber} of {numPages}
-              </p> */}
-                  <div className={styles.pdfContainer}>
-                    <Document file={documentDetails?.file_record} onLoadSuccess={onDocumentLoadSuccess}>
-                      {Array.from(new Array(numPages), (el, index) => (
-                        <Page className={styles.page} key={`page_${index + 1}`} pageNumber={index + 1} />
-                      ))}
-                    </Document>
-                  </div>
+              {documentDetails?.type_save === TYPE_SAVE.FILE ? (
+              <div className={`${styles.viewPdf}`}>
+                <div className={styles.pdfContainer}>
+                  <Document file={documentDetails?.file_record} onLoadSuccess={onDocumentLoadSuccess}>
+                    {Array.from(new Array(numPages), (el, index) => (
+                      <Page className={styles.page} key={`page_${index + 1}`} pageNumber={index + 1} />
+                    ))}
+                  </Document>
                 </div>
-
-                <CommentForUser/>
-
+                <CommentForUser />
               </div>
+              ) : (
+                <Tabs defaultActiveKey="1" items={displayItem()} />
+              )}
+              </div>
+              
             </Col>
             <Col sm={7} xs={24}>
               <div className={`${styles.viewTabs}`}>

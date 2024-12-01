@@ -5,15 +5,24 @@ import IconWarning from '@/assets/images/icons/light/warning.svg';
 import IconPlus from '@/assets/images/icons/light/plus.svg';
 import IconRemove from '@/assets/images/icons/duotone/remove.svg';
 import IconStar from '@/assets/images/icons/duotone/star.svg';
-import {Button, Col, DatePicker, Input, Row, Select, Switch, Tag, Tooltip} from 'antd';
+import {Button, Col, DatePicker, Input, Radio, Row, Select, Switch, Tag, Tooltip} from 'antd';
 import Handle from '@/pages/Document/components/DocumentItem/handle';
-import {DOCUMENT_STATUS, formatLocalDateTime, STATUS_DOC_CHECK, TYPE_SUBMIT} from '@/utils/constants';
+import {
+  DOCUMENT_STATUS,
+  formatLocalDateTime,
+  STATUS_DOC_CHECK,
+  TYPE_SUBMIT,
+  TYPE_SAVE,
+} from '@/utils/constants';
 import {createDocumentSchema, updateDocumentSchema} from '@/pages/Document/components/DocumentItem/schema';
 import './styles.scss';
 import styles from './styles.module.scss';
 import {CheckOutlined, CloseCircleOutlined, DeleteOutlined} from '@ant-design/icons';
 import moment from 'moment';
 import dayjs from 'dayjs';
+import Delete from '@/assets/images/icons/duotone/trash-can.svg';
+import NoData from '@/pages/Permission/NoData';
+import PlusIcon from '@/assets/images/icons/light/plus.svg';
 
 function ModalCreateOrUpdateDocument() {
   const errorInfoDocument = useSelector((state) => state.document.errorInfoDocument);
@@ -36,10 +45,25 @@ function ModalCreateOrUpdateDocument() {
     handleRemoveFile,
     handleSwitchChange,
     handleChangeChecked,
+    handleChangeTypeUploadFile,
+    addContact,
+    removeContact,
+    handleChapterChange,
   } = Handle();
 
   const {TextArea} = Input;
   const [isHovered, setIsHovered] = useState(false);
+
+  const options = [
+    {
+      label: 'File',
+      value: TYPE_SAVE.FILE,
+    },
+    {
+      label: 'Chương',
+      value: TYPE_SAVE.CHAPTERS,
+    },
+  ];
 
   return (
     <div>
@@ -89,31 +113,29 @@ function ModalCreateOrUpdateDocument() {
           </div>
         </div>
       </div>
-
+      <div className={`input-wrap`}>
+        <div className="label-wrap">
+          <label className={`required label-input`}>Tên tài liệu</label>
+        </div>
+        <Input
+          value={infoDocument.name}
+          onFocus={() => handleFocus('name')}
+          onChange={(e) => handleChangeInputInfo(e.target.value, 'name')}
+          className={`main-input ${errorInfoDocument && errorInfoDocument.name ? 'error-input' : ''}`}
+          placeholder={'Nhập tên tài liệu'}
+        />
+        {errorInfoDocument && errorInfoDocument.name && (
+          <span className={`error`}>
+            <div className={`icon`}>
+              <InlineSVG src={IconWarning} width={14} height={14} />
+            </div>
+            {errorInfoDocument.name}
+          </span>
+        )}
+      </div>
       <div className="layout-info">
         <Row gutter={20}>
           <Col sm={12} xs={24}>
-            <div className={`input-wrap`}>
-              <div className="label-wrap">
-                <label className={`required label-input`}>Tên tài liệu</label>
-              </div>
-              <Input
-                value={infoDocument.name}
-                onFocus={() => handleFocus('name')}
-                onChange={(e) => handleChangeInputInfo(e.target.value, 'name')}
-                className={`main-input ${errorInfoDocument && errorInfoDocument.name ? 'error-input' : ''}`}
-                placeholder={'Nhập tên tài liệu'}
-              />
-              {errorInfoDocument && errorInfoDocument.name && (
-                <span className={`error`}>
-                  <div className={`icon`}>
-                    <InlineSVG src={IconWarning} width={14} height={14} />
-                  </div>
-                  {errorInfoDocument.name}
-                </span>
-              )}
-            </div>
-
             <div className={`input-wrap`}>
               <div className="label-wrap">
                 <label className={`label-input`}>Thể loại</label>
@@ -192,81 +214,6 @@ function ModalCreateOrUpdateDocument() {
           <Col sm={12} xs={24}>
             <div className={`input-wrap`}>
               <div className="label-wrap">
-                <label className={`label-input required`}>File tài liệu</label>
-              </div>
-              <input
-                id="pdfFile"
-                type="file"
-                accept="application/pdf"
-                required
-                onChange={(e) => handleChangeInputInfo(e, 'file_record')}
-                style={{display: 'none'}}
-              />
-              <div
-                style={{
-                  backgroundColor: '#f9f9f9',
-                  fontSize: '13px',
-                  color: '#c6c6c6',
-                  padding: '10px',
-                  borderRadius: '6px',
-                  border: '1px dotted #ceced6',
-                  height: '44px',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <label htmlFor="pdfFile">
-                  {infoDocument.name_file ? (
-                    <div
-                      style={{
-                        color: 'blue',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        maxWidth: '300px',
-                      }}
-                    >
-                      <Tooltip title={infoDocument.name_file}>
-                        <span>{infoDocument.name_file}</span>
-                      </Tooltip>
-                    </div>
-                  ) : fileName ? (
-                    <div
-                      style={{
-                        color: 'blue',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        maxWidth: '300px',
-                      }}
-                    >
-                      <Tooltip title={fileName}>
-                        <span>{fileName}</span>
-                      </Tooltip>
-                    </div>
-                  ) : (
-                    '+ Tải tệp ở đây'
-                  )}
-                </label>
-                {fileName ? (
-                  <Tooltip title={'Xóa tài liệu'}>
-                    <span
-                      style={{color: isHovered ? 'red' : 'gray', cursor: 'pointer'}}
-                      onClick={handleRemoveFile}
-                      onMouseEnter={() => setIsHovered(true)}
-                      onMouseLeave={() => setIsHovered(false)}
-                    >
-                      <DeleteOutlined />
-                    </span>
-                  </Tooltip>
-                ) : (
-                  ''
-                )}
-              </div>
-            </div>
-
-            <div className={`input-wrap`}>
-              <div className="label-wrap">
                 <label className={`required label-input`}>Tác giả</label>
               </div>
               <Input
@@ -316,7 +263,7 @@ function ModalCreateOrUpdateDocument() {
               <div className="bg-[#f9f9f9] rounded-[6px] py-[8px] px-[8px] mt-[6px]">
                 <div className="flex justify-between">
                   <span>Kiểm duyệt tài liệu</span>
-                  <span className='mr-[-7px]'>
+                  <span className="mr-[-7px]">
                     {infoDocument.doc_check === STATUS_DOC_CHECK.PENDING ? (
                       <Tooltip placement="left" title="Duyệt tài liệu này" color="#1f7a1f">
                         <Tag
@@ -380,6 +327,211 @@ function ModalCreateOrUpdateDocument() {
           </span>
         )}
       </div>
+      <Row gutter={20}>
+        <Col sm={5} xs={24}>
+          <div className={`input-wrap`}>
+            <div className="label-wrap">
+              <label className={`label-input required`}>Loại lưu trữ</label>
+            </div>
+            <Radio.Group
+              block
+              options={options}
+              optionType="button"
+              buttonStyle="solid"
+              className="mt-[6px]"
+              value={infoDocument.type_save}
+              onChange={(e) => handleChangeTypeUploadFile(e.target.value)}
+            />
+          </div>
+        </Col>
+        <Col sm={19} xs={24}>
+          {infoDocument?.type_save === TYPE_SAVE.FILE ? (
+            <div className={`input-wrap`}>
+              <div className="label-wrap">
+                <label className={`label-input required`}>File tài liệu</label>
+              </div>
+              <input
+                id="pdfFile"
+                type="file"
+                accept="application/pdf"
+                required
+                onChange={(e) => handleChangeInputInfo(e, 'file_record')}
+                style={{display: 'none'}}
+              />
+              <div
+                style={{
+                  backgroundColor: '#f9f9f9',
+                  fontSize: '13px',
+                  color: '#c6c6c6',
+                  padding: '10px',
+                  borderRadius: '6px',
+                  border: '1px dotted #ceced6',
+                  height: '44px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <label htmlFor="pdfFile" className=" hover:text-blue-60">
+                  {infoDocument.name_file ? (
+                    <div
+                      style={{
+                        color: 'blue',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        maxWidth: '300px',
+                      }}
+                    >
+                      <Tooltip title={infoDocument.name_file}>
+                        <span>{infoDocument.name_file}</span>
+                      </Tooltip>
+                    </div>
+                  ) : fileName ? (
+                    <div
+                      style={{
+                        color: 'blue',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        maxWidth: '300px',
+                      }}
+                    >
+                      <Tooltip title={fileName}>
+                        <span>{fileName}</span>
+                      </Tooltip>
+                    </div>
+                  ) : (
+                    '+ Tải tệp ở đây'
+                  )}
+                </label>
+                {fileName ? (
+                  <Tooltip title={'Xóa tài liệu'}>
+                    <span
+                      style={{color: isHovered ? 'red' : 'gray', cursor: 'pointer'}}
+                      onClick={handleRemoveFile}
+                      onMouseEnter={() => setIsHovered(true)}
+                      onMouseLeave={() => setIsHovered(false)}
+                    >
+                      <DeleteOutlined />
+                    </span>
+                  </Tooltip>
+                ) : (
+                  ''
+                )}
+              </div>
+            </div>
+          ) : (
+            <>
+              {infoDocument?.chapters?.length > 0 ? (
+                <div
+                  className={`${styles.chaptersWrap} mt-[33px]`}
+                >
+                  {infoDocument?.chapters?.map((item, index) => (
+                    <div className={`input-wrap`} key={index}>
+                      <div className={styles.contactWrap}>
+                        <div className={`${styles.itemChapter}`}>
+                          <div className={`input-wrap`}>
+                            <div className="label-wrap flex justify-between">
+                              <label className={`label-input p-1`}>Chương {index + 1}</label>
+                              <div>
+                                <Tooltip placement="top" title={'Xóa'}>
+                                  <div
+                                    className={`btn-delete cursor-pointer`}
+                                    onClick={() => removeContact(index)}
+                                  >
+                                    <InlineSVG src={Delete} width={14} />
+                                  </div>
+                                </Tooltip>
+                              </div>
+                            </div>
+                            <Input
+                              value={item.name}
+                              onChange={(e) => handleChapterChange(index, 'name', e.target.value)}
+                              className={`main-input`}
+                              placeholder={`Nhập tên chương ${index + 1}`}
+                            />
+                          </div>
+                          <div className={`input-wrap`}>
+                            <input
+                              id={`pdfFile${index}`}
+                              type="file"
+                              accept="application/pdf"
+                              required
+                              style={{display: 'none'}}
+                              onChange={(e) => handleChapterChange(index, 'file_chapter', e.target.files[0])}
+                            />
+                            <div
+                              style={{
+                                backgroundColor: '#f9f9f9',
+                                fontSize: '13px',
+                                color: '#c6c6c6',
+                                padding: '10px',
+                                borderRadius: '6px',
+                                border: '1px dotted #ceced6',
+                                height: '44px',
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                              }}
+                            >
+                              <label htmlFor={`pdfFile${index}`} className="ml-[12px] hover:text-blue-60">
+                                {item?.name_file_chapter ? (
+                                  <div
+                                    style={{
+                                      color: 'blue',
+                                      whiteSpace: 'nowrap',
+                                      overflow: 'hidden',
+                                      textOverflow: 'ellipsis',
+                                      maxWidth: '550px',
+                                    }}
+                                  >
+                                    <Tooltip title={item?.name_file_chapter}>
+                                      <span>{item?.name_file_chapter}</span>
+                                    </Tooltip>
+                                  </div>
+                                ) : item?.name_file_chapter ? (
+                                  <div
+                                    style={{
+                                      color: 'blue',
+                                      whiteSpace: 'nowrap',
+                                      overflow: 'hidden',
+                                      textOverflow: 'ellipsis',
+                                      maxWidth: '550px',
+                                    }}
+                                  >
+                                    <Tooltip title={item?.name_file_chapter}>
+                                      <span>{item?.name_file_chapter}</span>
+                                    </Tooltip>
+                                  </div>
+                                ) : (
+                                  '+ Tải tệp ở đây'
+                                )}
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className={`${styles.noChapter} mt-[37px]`}>
+                  <NoData description='Không có chương nào!'/>
+                </div>
+              )}
+
+              <div
+                className={`flex justify-center ${
+                  infoDocument?.chapter?.length > 0 ? 'mt-[16px]' : 'mt-[33px]'
+                }`}
+              >
+                <Button icon={<InlineSVG src={PlusIcon} className={`w-3 h-3`} />} className={`ant-btn-primary`} onClick={addContact}>
+                  Thêm chương
+                </Button>
+              </div>
+            </>
+          )}
+        </Col>
+      </Row>
 
       <div className={`flex justify-center mt-8`}>
         <Button

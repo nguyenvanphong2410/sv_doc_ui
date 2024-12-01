@@ -38,46 +38,6 @@ function TableDocument({handleChangeTableDocument}) {
 
   const columns = [
     {
-      title: <span className="title-table">Kiểm duyệt</span>,
-      dataIndex: 'doc_check',
-      key: 'doc_check',
-      align: 'center',
-      width: 120,
-      showSorterTooltip: false,
-      defaultSortOrder: '',
-      render: (text, record) => {
-        return (
-          <div className={`flex w-full justify-center bg-white cursor-pointer`}>
-            <span>
-              {record.doc_check === STATUS_DOC_CHECK.PENDING ? (
-                <Tooltip title="Duyệt tài liệu này" color="#1f7a1f">
-                  <Tag
-                    className={`cursor-pointer`}
-                    color="#1f7a1f"
-                    icon={<CheckOutlined />}
-                    onClick={() => handleUpdateChecked(record)}
-                  >
-                    Duyệt
-                  </Tag>
-                </Tooltip>
-              ) : (
-                <Tooltip title="Nhấn để bỏ duyệt tài liệu" color="grey">
-                  <Tag
-                    className={`cursor-pointer`}
-                    color="grey"
-                    icon={<CloseCircleOutlined />}
-                    onClick={() => handleUpdateChecked(record)}
-                  >
-                    Hủy
-                  </Tag>
-                </Tooltip>
-              )}
-            </span>
-          </div>
-        );
-      },
-    },
-    {
       title: <span className="title-table">Mã tài liệu</span>,
       dataIndex: 'pictures',
       key: 'pictures',
@@ -100,6 +60,17 @@ function TableDocument({handleChangeTableDocument}) {
               >
                 {record.code}
               </a>
+              <div className="mt-2">
+                {record.doc_check === STATUS_DOC_CHECK.PENDING ? (
+                  <Tooltip title="Tài liệu chờ phê duyệt">
+                    <Tag color="yellow">Chờ duyệt</Tag>
+                  </Tooltip>
+                ) : (
+                  <Tooltip title="Tài liệu đã được phê duyệt">
+                    <Tag color="green">Đã duyệt</Tag>
+                  </Tooltip>
+                )}
+              </div>
             </span>
           </div>
         );
@@ -110,7 +81,7 @@ function TableDocument({handleChangeTableDocument}) {
       title: <span className="title-table">Tên tài liệu</span>,
       dataIndex: 'name',
       key: 'name',
-      width: 200,
+      width: 300,
       sorter: (a, b) => a.age - b.age,
       showSorterTooltip: false,
       defaultSortOrder: '',
@@ -118,7 +89,7 @@ function TableDocument({handleChangeTableDocument}) {
         return (
           <div className={` font-medium`}>
             <span
-              className={`name-user cursor-pointer`}
+              className={`name-user cursor-pointer textDotDotDot`}
               onClick={() => handleShowModalUpdateDocument(record, TYPE_SUBMIT.UPDATE)}
             >
               {text}
@@ -159,33 +130,6 @@ function TableDocument({handleChangeTableDocument}) {
       },
     },
     {
-      title: <span className="title-table">Trạng thái</span>,
-      dataIndex: 'doc_check',
-      key: 'doc_check',
-      align: 'center',
-      width: 120,
-      sorter: (a, b) => a.age - b.age,
-      showSorterTooltip: false,
-      defaultSortOrder: '',
-      render: (text, record) => {
-        return (
-          <div className={`flex w-full justify-center bg-white cursor-pointer`}>
-            <span>
-              {record.doc_check === STATUS_DOC_CHECK.PENDING ? (
-                <Tooltip title="Tài liệu chờ phê duyệt">
-                  <Tag color="yellow">Chờ duyệt</Tag>
-                </Tooltip>
-              ) : (
-                <Tooltip title="Tài liệu đã được phê duyệt">
-                  <Tag color="green">Đã duyệt</Tag>
-                </Tooltip>
-              )}
-            </span>
-          </div>
-        );
-      },
-    },
-    {
       title: <span className="title-table">Lượt xem</span>,
       dataIndex: 'view_quantity',
       key: 'view_quantity',
@@ -209,48 +153,79 @@ function TableDocument({handleChangeTableDocument}) {
           width: 160,
           render: (text, record) => {
             return (
-              <div className={`flex w-full justify-center bg-white`}>
-                {hasPermission([PERMISSIONS.EDIT.EDIT_DOCUMENT]) && (
-                  <div className={`mt-[5px] mr-2`}>
-                    <Tooltip
-                      placement="top"
-                      title={record.status === DOCUMENT_STATUS.LOCK ? 'Khoá' : 'Kích hoạt'}
+              <>
+                <div className={`flex w-full justify-center bg-white`}>
+                  {hasPermission([PERMISSIONS.DETAIL.DETAIL_DOCUMENT]) && (
+                    <div className={`action-user mr-2`} onClick={() => handleClickViewDetails(record)}>
+                      <Tooltip title="Xem chi tiết">
+                        <InlineSVG src={IconEye} className={`w-[16px] h-[16px] `} alt="" />
+                      </Tooltip>
+                    </div>
+                  )}
+                  {hasPermission([PERMISSIONS.EDIT.EDIT_DOCUMENT]) && (
+                    <div
+                      className={`action-user mr-2`}
+                      onClick={() => handleShowModalUpdateDocument(record, TYPE_SUBMIT.UPDATE)}
                     >
-                      <Switch
-                        size="small"
-                        className={`main-switch`}
-                        onChange={() => handleUpdateStatusRoom(record)}
-                        checked={record.status === DOCUMENT_STATUS.UNLOCK ? true : false}
-                      />
-                    </Tooltip>
-                  </div>
-                )}
-                {hasPermission([PERMISSIONS.DETAIL.DETAIL_DOCUMENT]) && (
-                  <div className={`action-user mr-2`} onClick={() => handleClickViewDetails(record)}>
-                    <Tooltip title="Xem chi tiết">
-                      <InlineSVG src={IconEye} className={`w-[16px] h-[16px] `} alt="" />
-                    </Tooltip>
-                  </div>
-                )}
-                {hasPermission([PERMISSIONS.EDIT.EDIT_DOCUMENT]) && (
-                  <div
-                    className={`action-user mr-2`}
-                    onClick={() => handleShowModalUpdateDocument(record, TYPE_SUBMIT.UPDATE)}
-                  >
-                    <Tooltip title="Cập nhật thông tin">
-                      <InlineSVG src={IconEditTable} className={`w-[16px] h-[16px] `} alt="" />
-                    </Tooltip>
-                  </div>
-                )}
+                      <Tooltip title="Cập nhật thông tin">
+                        <InlineSVG src={IconEditTable} className={`w-[16px] h-[16px] `} alt="" />
+                      </Tooltip>
+                    </div>
+                  )}
 
-                {hasPermission([PERMISSIONS.DELETE.DELETE_DOCUMENT]) && (
-                  <div className={`action-user`} onClick={() => handleDeleteDocumentAlert(record)}>
-                    <Tooltip title="Xóa thông tin">
-                      <InlineSVG src={IconDeleteTable} className={`w-[16px] h-[16px]`} alt="" />
-                    </Tooltip>
-                  </div>
-                )}
-              </div>
+                  {hasPermission([PERMISSIONS.DELETE.DELETE_DOCUMENT]) && (
+                    <div className={`action-user`} onClick={() => handleDeleteDocumentAlert(record)}>
+                      <Tooltip title="Xóa thông tin">
+                        <InlineSVG src={IconDeleteTable} className={`w-[16px] h-[16px]`} alt="" />
+                      </Tooltip>
+                    </div>
+                  )}
+                </div>
+                <div className={`flex w-full justify-center bg-white mt-1`}>
+                  {hasPermission([PERMISSIONS.EDIT.EDIT_DOCUMENT]) && (
+                    <div className={`mt-[5px] mr-2`}>
+                      {record.doc_check === STATUS_DOC_CHECK.PENDING ? (
+                        <Tooltip title="Duyệt tài liệu này" color="#1f7a1f">
+                          <Tag
+                            className={`cursor-pointer`}
+                            color="#1f7a1f"
+                            icon={<CheckOutlined />}
+                            onClick={() => handleUpdateChecked(record)}
+                          >
+                            Duyệt
+                          </Tag>
+                        </Tooltip>
+                      ) : (
+                        <Tooltip title="Nhấn để bỏ duyệt tài liệu" color="grey">
+                          <Tag
+                            className={`cursor-pointer`}
+                            color="grey"
+                            icon={<CloseCircleOutlined />}
+                            onClick={() => handleUpdateChecked(record)}
+                          >
+                            Hủy
+                          </Tag>
+                        </Tooltip>
+                      )}
+                    </div>
+                  )}
+                  {hasPermission([PERMISSIONS.EDIT.EDIT_DOCUMENT]) && (
+                    <div className={`mt-[5px]`}>
+                      <Tooltip
+                        placement="top"
+                        title={record.status === DOCUMENT_STATUS.LOCK ? 'Khoá' : 'Kích hoạt'}
+                      >
+                        <Switch
+                          size="small"
+                          className={`main-switch`}
+                          onChange={() => handleUpdateStatusRoom(record)}
+                          checked={record.status === DOCUMENT_STATUS.UNLOCK ? true : false}
+                        />
+                      </Tooltip>
+                    </div>
+                  )}
+                </div>
+              </>
             );
           },
         }

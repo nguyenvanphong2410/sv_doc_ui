@@ -76,3 +76,46 @@
     }
   }
 }
+
+.configContactWrap {
+  @apply max-w-[50rem] mx-auto min-h-[calc(100vh_-_135px)] p-[30px] rounded-lg bg-white border border-gray-110 shadow-sm flex flex-col justify-between;
+  .contactWrap{
+      @apply flex;
+      .btnDelete{
+          @apply border flex items-center justify-center w-[54px] h-[44px] rounded-lg ml-[10px]
+      }
+    }
+}
+
+.chaptersWrap {
+  max-height: 400px;
+  min-height: 24px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 10px;
+  padding-bottom: 0;
+  border: 1px solid #efefef;
+}
+
+.noChapter{
+  max-height: 400px;
+  min-height: 24px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  padding: 20px;
+  border: 1px solid #efefef;
+}
+
+
+.itemChapter {
+  background-color: #ffffff;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 8px;
+  padding-bottom: 1px;
+
+}

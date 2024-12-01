@@ -31,10 +31,10 @@ const documentSlice = createSlice({
 
     //ForUser
     isLoadingBtnCreateDocumentForUser: false,
-    isLoadingTableDocumentByCategoryId:false,
-    isLoadingTableDocumentViewQuantity:false,
-    listDocByCategoryId:[],
-    listDocViewQuantity:[],
+    isLoadingTableDocumentByCategoryId: false,
+    isLoadingTableDocumentViewQuantity: false,
+    listDocByCategoryId: [],
+    listDocViewQuantity: [],
 
     // My doc Pending
     isLoadingTableDocumentPending: false,
@@ -459,7 +459,6 @@ export const {
   setVisibleModalCreateOrUpdateDocument,
 
   setSelectCategoryId,
-
   setDocumentSelected,
 
   //ForUser

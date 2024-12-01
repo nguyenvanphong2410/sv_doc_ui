@@ -164,3 +164,8 @@ export const STATUS_DOC_CHECK = {
   CHECKED: "CHECKED",
   PENDING: "PENDING",
 };
+
+export const TYPE_SAVE = {
+  FILE: "FILE",
+  CHAPTERS: "CHAPTERS",
+};

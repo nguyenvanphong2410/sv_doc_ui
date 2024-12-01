@@ -88,6 +88,7 @@ export const handleCreateDocument = (data) => async (dispatch, getState) => {
     'Content-Type': 'multipart/form-data',
   };
   let form = new FormData();
+
   form.append('name', data.name);
   form.append('description', data.description ? data.description : '');
   form.append('author', data.author ? data.author : '');
@@ -95,7 +96,9 @@ export const handleCreateDocument = (data) => async (dispatch, getState) => {
   form.append('publication_time', data.publication_time ? data.publication_time : '');
   form.append('file_record', data.file_record ? data.file_record : null);
   form.append('name_file', data.name_file ? data.name_file : null);
+  form.append('type_save', data.type_save ? data.type_save : null);
 
+  // Xử lý hình ảnh
   let imageFeatured = 0;
   data.images.forEach((image, index) => {
     form.append('images', image.file);
@@ -105,11 +108,24 @@ export const handleCreateDocument = (data) => async (dispatch, getState) => {
   });
   form.append('image_featured', imageFeatured);
 
+  // Thêm category_id vào form data
   if (data.category_id?.length > 0) {
     data.category_id.map((item) => {
       form.append('category_id[]', item);
     });
   }
+
+  // Thêm chapter vào form data
+  data.chapters?.forEach((chapter, index) => {
+    // Thêm tên chương
+    form.append(`chapters[${index}]name`, chapter.name);
+    form.append(`chapters[${index}]name_file_chapter`, chapter.name_file_chapter);
+
+    // Thêm file chương nếu có
+    if (chapter.file_chapter) {
+      form.append(`chapters[${index}]file_chapter`, chapter.file_chapter);
+    }
+  });
 
   return callApi({
     method: 'post',
@@ -137,6 +153,7 @@ export const handleUpdateDocument = (id, dataDocument) => async (dispatch, getSt
   form.append('name_file', dataDocument.name_file ? dataDocument.name_file : null);
   form.append('status', dataDocument.status ? dataDocument.status : null);
   form.append('doc_check', dataDocument.doc_check ? dataDocument.doc_check : null);
+  form.append('type_save', dataDocument.type_save ? dataDocument.type_save : null);
 
   let imageFeatured = 0;
   dataDocument.images.forEach((image, index) => {
@@ -153,6 +170,26 @@ export const handleUpdateDocument = (id, dataDocument) => async (dispatch, getSt
       form.append('category_id[]', item);
     });
   }
+
+  // Xử lý chapters: Loại bỏ file_chapter nếu là string
+  const processedChapters = dataDocument.chapters.map((chapter, index) => {
+    if (typeof chapter.file_chapter === 'string') {
+      const {file_chapter, ...rest} = chapter; // Loại bỏ file_chapter
+      return rest;
+    }
+    return chapter;
+  });
+
+  // Thêm chapters vào form data
+  processedChapters.forEach((chapter, index) => {
+    form.append(`chapters[${index}]_id`, chapter._id);
+    form.append(`chapters[${index}]name`, chapter.name);
+    form.append(`chapters[${index}]name_file_chapter`, chapter.name_file_chapter);
+
+    if (chapter.file_chapter) {
+      form.append(`chapters[${index}]file_chapter`, chapter.file_chapter);
+    }
+  });
 
   return callApi({
     method: 'put',
@@ -238,6 +275,7 @@ export const requestUpdateDocumentForUser = (id, dataDocument) => async (dispatc
   form.append('publication_time', dataDocument.publication_time ? dataDocument.publication_time : '');
   form.append('file_record', dataDocument.file_record ? dataDocument.file_record : null);
   form.append('name_file', dataDocument.name_file ? dataDocument.name_file : null);
+  form.append('type_save', dataDocument.type_save ? dataDocument.type_save : null);
 
   let imageFeatured = 0;
   dataDocument.images.forEach((image, index) => {
@@ -254,6 +292,26 @@ export const requestUpdateDocumentForUser = (id, dataDocument) => async (dispatc
       form.append('category_id[]', item);
     });
   }
+
+  // Xử lý chapters: Loại bỏ file_chapter nếu là string
+  const processedChapters = dataDocument.chapters.map((chapter, index) => {
+    if (typeof chapter.file_chapter === 'string') {
+      const {file_chapter, ...rest} = chapter; // Loại bỏ file_chapter
+      return rest;
+    }
+    return chapter;
+  });
+
+  // Thêm chapters vào form data
+  processedChapters.forEach((chapter, index) => {
+    form.append(`chapters[${index}]_id`, chapter._id);
+    form.append(`chapters[${index}]name`, chapter.name);
+    form.append(`chapters[${index}]name_file_chapter`, chapter.name_file_chapter);
+
+    if (chapter.file_chapter) {
+      form.append(`chapters[${index}]file_chapter`, chapter.file_chapter);
+    }
+  });
 
   return callApi({
     method: 'put',
@@ -291,6 +349,7 @@ export const requestCreateDocumentForUser = (data) => async (dispatch, getState)
   form.append('publication_time', data.publication_time ? data.publication_time : '');
   form.append('file_record', data.file_record ? data.file_record : null);
   form.append('name_file', data.name_file ? data.name_file : null);
+  form.append('type_save', data.type_save ? data.type_save : null);
 
   let imageFeatured = 0;
   data.images.forEach((image, index) => {
@@ -306,6 +365,18 @@ export const requestCreateDocumentForUser = (data) => async (dispatch, getState)
       form.append('category_id[]', item);
     });
   }
+
+  // Thêm chapter vào form data
+  data.chapters?.forEach((chapter, index) => {
+    // Thêm tên chương
+    form.append(`chapters[${index}]name`, chapter.name);
+    form.append(`chapters[${index}]name_file_chapter`, chapter.name_file_chapter);
+
+    // Thêm file chương nếu có
+    if (chapter.file_chapter) {
+      form.append(`chapters[${index}]file_chapter`, chapter.file_chapter);
+    }
+  });
 
   return callApi({
     method: 'post',
@@ -378,6 +449,7 @@ export const requestUpdateMyDocumentPending = (id, dataDocument) => async (dispa
   form.append('publication_time', dataDocument.publication_time ? dataDocument.publication_time : '');
   form.append('file_record', dataDocument.file_record ? dataDocument.file_record : null);
   form.append('name_file', dataDocument.name_file ? dataDocument.name_file : null);
+  form.append('type_save', dataDocument.type_save ? dataDocument.type_save : null);
 
   let imageFeatured = 0;
   dataDocument.images.forEach((image, index) => {
@@ -394,6 +466,26 @@ export const requestUpdateMyDocumentPending = (id, dataDocument) => async (dispa
       form.append('category_id[]', item);
     });
   }
+
+  // Xử lý chapters: Loại bỏ file_chapter nếu là string
+  const processedChapters = dataDocument.chapters.map((chapter, index) => {
+    if (typeof chapter.file_chapter === 'string') {
+      const {file_chapter, ...rest} = chapter; // Loại bỏ file_chapter
+      return rest;
+    }
+    return chapter;
+  });
+
+  // Thêm chapters vào form data
+  processedChapters.forEach((chapter, index) => {
+    form.append(`chapters[${index}]_id`, chapter._id);
+    form.append(`chapters[${index}]name`, chapter.name);
+    form.append(`chapters[${index}]name_file_chapter`, chapter.name_file_chapter);
+
+    if (chapter.file_chapter) {
+      form.append(`chapters[${index}]file_chapter`, chapter.file_chapter);
+    }
+  });
 
   return callApi({
     method: 'put',
@@ -443,6 +535,7 @@ export const requestUpdateMyDocumentChecked = (id, dataDocument) => async (dispa
   form.append('publication_time', dataDocument.publication_time ? dataDocument.publication_time : '');
   form.append('file_record', dataDocument.file_record ? dataDocument.file_record : null);
   form.append('name_file', dataDocument.name_file ? dataDocument.name_file : null);
+  form.append('type_save', dataDocument.type_save ? dataDocument.type_save : null);
 
   let imageFeatured = 0;
   dataDocument.images.forEach((image, index) => {
@@ -459,6 +552,26 @@ export const requestUpdateMyDocumentChecked = (id, dataDocument) => async (dispa
       form.append('category_id[]', item);
     });
   }
+
+  // Xử lý chapters: Loại bỏ file_chapter nếu là string
+  const processedChapters = dataDocument.chapters.map((chapter, index) => {
+    if (typeof chapter.file_chapter === 'string') {
+      const {file_chapter, ...rest} = chapter; // Loại bỏ file_chapter
+      return rest;
+    }
+    return chapter;
+  });
+
+  // Thêm chapters vào form data
+  processedChapters.forEach((chapter, index) => {
+    form.append(`chapters[${index}]_id`, chapter._id);
+    form.append(`chapters[${index}]name`, chapter.name);
+    form.append(`chapters[${index}]name_file_chapter`, chapter.name_file_chapter);
+
+    if (chapter.file_chapter) {
+      form.append(`chapters[${index}]file_chapter`, chapter.file_chapter);
+    }
+  });
 
   return callApi({
     method: 'put',
@@ -519,6 +632,7 @@ export const requestUpdateMyDocumentLock = (id, dataDocument) => async (dispatch
   form.append('publication_time', dataDocument.publication_time ? dataDocument.publication_time : '');
   form.append('file_record', dataDocument.file_record ? dataDocument.file_record : null);
   form.append('name_file', dataDocument.name_file ? dataDocument.name_file : null);
+  form.append('type_save', dataDocument.type_save ? dataDocument.type_save : null);
 
   let imageFeatured = 0;
   dataDocument.images.forEach((image, index) => {
@@ -535,6 +649,26 @@ export const requestUpdateMyDocumentLock = (id, dataDocument) => async (dispatch
       form.append('category_id[]', item);
     });
   }
+
+  // Xử lý chapters: Loại bỏ file_chapter nếu là string
+  const processedChapters = dataDocument.chapters.map((chapter, index) => {
+    if (typeof chapter.file_chapter === 'string') {
+      const {file_chapter, ...rest} = chapter; // Loại bỏ file_chapter
+      return rest;
+    }
+    return chapter;
+  });
+
+  // Thêm chapters vào form data
+  processedChapters.forEach((chapter, index) => {
+    form.append(`chapters[${index}]_id`, chapter._id);
+    form.append(`chapters[${index}]name`, chapter.name);
+    form.append(`chapters[${index}]name_file_chapter`, chapter.name_file_chapter);
+
+    if (chapter.file_chapter) {
+      form.append(`chapters[${index}]file_chapter`, chapter.file_chapter);
+    }
+  });
 
   return callApi({
     method: 'put',

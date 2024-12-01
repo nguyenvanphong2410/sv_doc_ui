@@ -8,6 +8,7 @@ import {
 import Swal from 'sweetalert2'
 import {useDispatch, useSelector} from 'react-redux'
 import { requestGetListDocumentsChecked, requestDeleteDocumentsChecked } from '@/api/document'
+import { initErrInfoDocument } from '@/states/modules/document/initState'
 
 export default function Handle() {
   const dispatch = useDispatch()
@@ -34,17 +35,7 @@ export default function Handle() {
       images: imageDocuments,
     }))
     dispatch(
-      setErrorInfoDocumentChecked({
-        name: "",
-        images: "",
-        sale_price: "",
-        wholesale_price: "",
-        cost_price: "",
-        unit: "",
-        quantity: "",
-        description: "",
-        category_id: "",
-      })
+      setErrorInfoDocumentChecked(initErrInfoDocument)
     )
     dispatch(setVisibleModalCreateOrUpdateDocumentChecked(true));
   }
