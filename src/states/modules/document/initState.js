@@ -1,16 +1,20 @@
+import {TYPE_SAVE} from '@/utils/constants';
+
 export const initInfoDocument = {
-  code: "",
-  name: "",
+  code: '',
+  name: '',
   images: [],
-  description: "",
+  description: '',
   category_id: [],
-  file_record: null,
-  name_file: "",
-  author: "",
-  publisher: "",
+  name_file: '',
+  author: '',
+  publisher: '',
   publication_time: null,
   status: null,
-  doc_check: "",
+  doc_check: '',
+  type_save: TYPE_SAVE.FILE,
+  file_record: null,
+  chapters: [],
 };
 
 export const initErrInfoDocument = {
@@ -24,6 +28,8 @@ export const initErrInfoDocument = {
   file_record: '',
   status: '',
   doc_check: '',
+  type_save: '',
+  chapters: '',
 };
 
 export const initDataFilterDocument = {

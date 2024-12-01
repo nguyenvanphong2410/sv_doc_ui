@@ -40,7 +40,6 @@ function TableEmployee() {
   const handleShowModalListDoc = (record) => {
     setNameSelected(record?.name)
     setIdSelected(record?._id)
-    console.log("🌈 ~ handleShowModalListDoc ~ record?._id:", record?._id)
     dispatch(setVisibleModalListDocEmployee(true))
   }
 

@@ -22,7 +22,6 @@ const Dashboard = () => {
   //   State cần
   const dispatch = useDispatch();
   const listDashboard = useSelector((state) => state.home.listDashboard);
-  console.log('🌈 ~ Dashboard ~ listDashboard:', listDashboard);
 
   useEffect(() => {
     document.title = 'SV.Doc - Tổng quan';

@@ -9,10 +9,18 @@ import {
 } from '@/states/modules/document';
 import {getListDocuments, handleCreateDocument, handleUpdateDocument} from '@/api/document';
 import {validate} from '@/utils/validates';
-import {TYPE_FILE, TYPE_SUBMIT, TYPE_IMAGE, DOCUMENT_STATUS, STATUS_DOC_CHECK} from '@/utils/constants';
+import {
+  TYPE_FILE,
+  TYPE_SUBMIT,
+  TYPE_IMAGE,
+  DOCUMENT_STATUS,
+  STATUS_DOC_CHECK,
+  TYPE_SAVE,
+} from '@/utils/constants';
 import {getNotification} from '@/utils/helper';
 import _ from 'lodash';
 import {useEffect, useState} from 'react';
+import {initErrInfoDocument, initInfoDocument} from '@/states/modules/document/initState';
 
 export default function Handle() {
   const dispatch = useDispatch();
@@ -100,7 +108,7 @@ export default function Handle() {
     let nameFile = infoDocument.name_file;
     if (type === 'file_record') {
       if (value.target.files.length > 0) {
-        nameFile = value.target.files[0].name
+        nameFile = value.target.files[0].name;
         setFileName(nameFile);
         dispatch(setInfoDocument({...data, name_file: nameFile}));
       }
@@ -149,51 +157,17 @@ export default function Handle() {
         type: TYPE_SUBMIT.CREATE,
       })
     );
-    dispatch(
-      setInfoDocument({
-        code: '',
-        name: '',
-        images: [],
-        sale_price: 0,
-        wholesale_price: 0,
-        cost_price: 0,
-        unit: '',
-        quantity: 0,
-        description: '',
-        category_id: [],
-      })
-    );
+    dispatch(setInfoDocument(initInfoDocument));
     dispatch(setVisibleModalCreateOrUpdateDocument(true));
     dispatch(setImageList([]));
   };
 
   const handleCancelModalCreateOrUpdateDocument = () => {
     dispatch(
-      setErrorInfoDocument({
-        name: '',
-        images: '',
-        sale_price: '',
-        wholesale_price: '',
-        cost_price: '',
-        unit: '',
-        quantity: '',
-        description: '',
-        category_id: '',
-      })
+      setErrorInfoDocument(initErrInfoDocument)
     );
     dispatch(
-      setInfoDocument({
-        code: '',
-        name: '',
-        images: [],
-        sale_price: 0,
-        wholesale_price: 0,
-        cost_price: 0,
-        unit: '',
-        quantity: 0,
-        description: '',
-        category_id: [],
-      })
+      setInfoDocument(initInfoDocument)
     );
     dispatch(setVisibleModalCreateOrUpdateDocument(false));
   };
@@ -288,14 +262,87 @@ export default function Handle() {
   };
 
   const handleSwitchChange = (checked) => {
-    const switchIndex = checked ? DOCUMENT_STATUS.UNLOCK : DOCUMENT_STATUS.LOCK
-    dispatch(setInfoDocument({...infoDocument, status: switchIndex}))
-  }
+    const switchIndex = checked ? DOCUMENT_STATUS.UNLOCK : DOCUMENT_STATUS.LOCK;
+    dispatch(setInfoDocument({...infoDocument, status: switchIndex}));
+  };
 
   const handleChangeChecked = (document) => {
-    const checkedSwitch = document.doc_check === STATUS_DOC_CHECK.CHECKED ? STATUS_DOC_CHECK.PENDING : STATUS_DOC_CHECK.CHECKED
-    dispatch(setInfoDocument({...infoDocument, doc_check: checkedSwitch}))
-  }
+    const checkedSwitch =
+      document.doc_check === STATUS_DOC_CHECK.CHECKED ? STATUS_DOC_CHECK.PENDING : STATUS_DOC_CHECK.CHECKED;
+    dispatch(setInfoDocument({...infoDocument, doc_check: checkedSwitch}));
+  };
+
+  const handleChangeTypeUploadFile = (valueTypeUploadFile) => {
+    if (valueTypeUploadFile === TYPE_SAVE.FILE) {
+      dispatch(setInfoDocument({...infoDocument, type_save: TYPE_SAVE.FILE}));
+    }
+    if (valueTypeUploadFile === TYPE_SAVE.CHAPTERS) {
+      dispatch(setInfoDocument({...infoDocument, type_save: TYPE_SAVE.CHAPTERS}));
+    }
+  };
+
+  const addContact = () => {
+    dispatch(
+      setInfoDocument({
+        ...infoDocument,
+        chapters: [
+          ...(infoDocument?.chapters?.length > 0 ? infoDocument.chapters : []),
+          {
+            name: '',
+            number_order: 1,
+            name_file_chapter:'',
+            file_chapter: null,
+          },
+        ],
+      })
+    );
+  };
+
+  const removeContact = (index) => {
+    let newChapter = [...infoDocument.chapters];
+    if (index >= 0 && index < newChapter.length) {
+      newChapter.splice(index, 1);
+    }
+    dispatch(
+      setInfoDocument({
+        ...infoDocument,
+        chapters: newChapter,
+      })
+    );
+  };
+
+  const handleChapterChange = (index, field, value) => {
+    console.log("🌈 ~ handleChapterChange ~ index:", index)
+    // console.log('!!! Dữ liệu:', index, field, value);
+  
+    // Tạo bản sao mảng chapters
+    const updatedChapters = _.cloneDeep(infoDocument.chapters); 
+  
+    if (index >= 0 && index < updatedChapters.length) {
+      if (field === 'name') {
+        // Nếu field là 'name', chỉ thay đổi name tại index
+        updatedChapters[index] = {
+          ...updatedChapters[index],
+          name: value,
+        };
+      } else if (field === 'file_chapter') {
+        // Nếu field là 'file_chapters', chỉ thay đổi file_chapters tại index
+        updatedChapters[index] = {
+          ...updatedChapters[index],
+          file_chapter: value, // value là file đã upload
+          name_file_chapter: value ? value.name : ''
+        };
+      }
+    }
+  
+    // Cập nhật state với các thay đổi
+    dispatch(
+      setInfoDocument({
+        ...infoDocument,
+        chapters: updatedChapters,
+      })
+    );
+  };
 
   return {
     dispatch,
@@ -319,5 +366,9 @@ export default function Handle() {
     handleRemoveFile,
     handleSwitchChange,
     handleChangeChecked,
+    handleChangeTypeUploadFile,
+    addContact,
+    removeContact,
+    handleChapterChange,
   };
 }

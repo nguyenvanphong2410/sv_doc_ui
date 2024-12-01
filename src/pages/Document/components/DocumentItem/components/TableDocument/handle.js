@@ -9,6 +9,7 @@ import Swal from 'sweetalert2'
 import {useDispatch, useSelector} from 'react-redux'
 import { DOCUMENT_STATUS, PRODUCT_STATUS, STATUS_DOC_CHECK } from '@/utils/constants'
 import { getListDocuments, handleDeleteDocument, requestChangeDocCheckDocument, requestChangeStatusDocument } from '@/api/document'
+import { initErrInfoDocument } from '@/states/modules/document/initState'
 
 export default function Handle() {
   const dispatch = useDispatch()
@@ -34,19 +35,7 @@ export default function Handle() {
       ...document,
       images: imageDocuments,
     }))
-    dispatch(
-      setErrorInfoDocument({
-        name: "",
-        images: "",
-        sale_price: "",
-        wholesale_price: "",
-        cost_price: "",
-        unit: "",
-        quantity: "",
-        description: "",
-        category_id: "",
-      })
-    )
+    dispatch(setErrorInfoDocument(initErrInfoDocument))
     dispatch(setVisibleModalCreateOrUpdateDocument(true));
   }
   

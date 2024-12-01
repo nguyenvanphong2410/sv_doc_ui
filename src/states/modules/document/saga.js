@@ -140,12 +140,12 @@ function* handleActions() {
 
   yield takeLatest(changeDocCheckDocumentSuccess, function* () {
     yield put(getListDocuments());
-    getNotification('success', 'Thay đổi trạng thái kiểm duyệt thành công.');
+    getNotification('success', 'Thay đổi kiểm duyệt thành công.');
   });
 
   yield takeLatest(changeDocCheckDocumentFail, function* () {
     yield put(getListDocuments());
-    getNotification('success', 'Thay đổi trạng thái kiểm duyệt thất bại.');
+    getNotification('success', 'Thay đổi kiểm duyệt thất bại.');
   });
 
   ///////////////////////////////////////////////////////////////////////////////////

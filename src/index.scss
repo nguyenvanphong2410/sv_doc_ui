@@ -61,6 +61,24 @@ body {
   }
 }
 
+// input-wrap-chapter
+.input-wrap-chapters {
+  @apply w-full xs:mb-[15px] s:mb-2.5;
+  .label-wrap {
+    .label-input{
+      @apply lg:text-sm md:text-sm xs:text-xs s:text-xs;
+    }
+    @apply text-[14px] text-black-title font-medium mb-[5px];
+  }
+
+  .error {
+    @apply flex items-center text-red-65 text-left md:text-sm xs:text-xs s:text-xs mt-[3px];
+    .icon {
+      @apply md:w-3.5 xs:w-3 s:w-3 mt-[-1px] mr-[3px]
+    }
+  }
+}
+
 /* Select */
 .main-select {
   @apply md:min-h-[44px] md:text-sm xs:min-h-[36px] xs:text-xs s:min-h-[36px] s:text-xs;
@@ -619,10 +637,10 @@ html *::-webkit-scrollbar-thumb {
   }
   &:hover {
     .fa-primary {
-      @apply fill-blue-65 #{!important};
+      @apply fill-red-65 #{!important};
     }
     .fa-secondary {
-      @apply fill-blue-70 #{!important};
+      @apply fill-red-70 #{!important};
     }
   }
 }
@@ -633,6 +651,22 @@ html *::-webkit-scrollbar-thumb {
 .hide-scrollbar {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+}
+
+.contact-uploader{
+  width: 44px !important;
+  margin-right: 10px;
+  .ant-upload{
+      width: 44px !important;
+      height: 44px !important;  
+  }
+}
+
+.textDotDotDot {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
 }
 
 @media (min-width: 320px) and (max-width: 767px) {
